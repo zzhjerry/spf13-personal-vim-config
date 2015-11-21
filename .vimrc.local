@@ -51,10 +51,3 @@ let g:user_emmet_mode='iv'
 " Autocompletion customization
 let g:ycm_server_log_level = 'debug'
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-
-" Autopair customization
-let g:AutoPairsShortcutJump = '<C-g>'
-
-" vim-slack customization
-let g:slack_incoming_token = 'xoxp-3646634195-7902217249-14489546323-b1dd4c6f87'
-let g:slack_fileupload_token = 'xoxp-3646634195-7902217249-14489546323-b1dd4c6f87'
