@@ -3,17 +3,15 @@ let g:mirodark_disable_color_approximation=1
 
 set relativenumber
 set autochdir
-hi clear SpellBad
 if has("gui_running")
   colorscheme luna
   set guifont=Monaco:h12
   set guioptions=cmg
-  " GUI is running or is about to start.
   " Maximize gvim window (for an alternative on Windows, see simalt below).
   set lines=999 columns=999
 else
   " This is for console Vim.
-  colorscheme mirodark
+  colorscheme solarized
   if exists("+lines")
     set lines=50
   endif
@@ -22,32 +20,55 @@ else
   endif
 endif
 
+hi clear SpellBad
+
 inoremap jk <Esc>
 
 " Buffer manipulation shortcuts
 nnoremap   <leader>k    :bn<CR>
 nnoremap   <leader>d    :bp<CR>
-nnoremap   <leader>o    :b 
-nnoremap   <leader>ov   :vsp \| b 
+nnoremap   <leader>o    :b
+nnoremap   <leader>ov   :vsp \| b
 nnoremap   <leader>x    :bd<CR>
 nnoremap   <leader>;    <C-^>
 inoremap   <c-e>        <c-[>A
 nnoremap   <leader>sf   :source ~/.vimrc.local<CR>
 nnoremap   <leader>vf   :vsplit ~/.vimrc.local<CR>
+nnoremap   <leader>vb   :vsplit ~/.vimrc.bundles.local<CR>
 nnoremap   <leader>vc   :vsplit ~/.vimrc<CR>
 nnoremap   <leader>w    :w<CR>
 nnoremap   <leader>z    :q<CR>
 unmap      <leader>sc
 nnoremap   <leader>sc   :qall<CR>
 
+" terrrma/vim-expand-region
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
+
 " autocommands
 augroup customgroup
     autocmd!
-    autocmd FileType html,hbs setlocal expandtab shiftwidth=2 tabstop=2
+    autocmd FileType html,hbs,coffee setlocal expandtab shiftwidth=2 softtabstop=2
 augroup end
-
 let g:user_emmet_mode='iv'
 
 " Autocompletion customization
 let g:ycm_server_log_level = 'debug'
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+
+" Autopair customization
+let g:AutoPairsShortcutJump = '<C-g>'
+
+
+" vim multiple cursor
+let g:multiple_cursor_exit_from_insert_mode = 0 "still use multiple cursor when back from insert mode to normal mode
+
+
+if !has('python')
+    let g:pymode = 0
+endif
+
+if isdirectory(expand("~/.vim/bundle/python-mode"))
+    let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+    let g:pymode_trim_whitespaces = 1
+endif
